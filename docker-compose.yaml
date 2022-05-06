@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  gin:
+    image: golang:1.18.1
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - 3000:3000
+    tty: true
+    environment:
+      - GO111MODULE=on
+  mysql:
+    image: mysql:8.0.29
+    hostname: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: gin
+    ports:
+      - 3306:3306
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
